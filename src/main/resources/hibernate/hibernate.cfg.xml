@@ -6,17 +6,19 @@
 
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/test_db?useSSL=true</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/db_blog?useSSL=true</property>
         <property name="connection.username">root</property>
         <property name="connection.password">madmax</property>
-        <property name="default_schema">test_db</property>
+        <property name="default_schema">db_blog</property>
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="current_session_context_class">thread</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">validate</property>
 
-        <mapping class="beans.Player"/>
-        <mapping class="beans.Team"/>
+        <mapping class="mdorokhin.model.Category"/>
+        <mapping class="mdorokhin.model.Comment"/>
+        <mapping class="mdorokhin.model.Post"/>
+
 
     </session-factory>
 

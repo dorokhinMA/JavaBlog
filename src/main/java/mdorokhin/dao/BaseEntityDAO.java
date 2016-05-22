@@ -10,10 +10,9 @@ import java.util.List;
  */
 public interface BaseEntityDAO<T extends BaseEntity> {
 
-    public void create(T entity);
-    public void delete(Integer id);
-    public void edit(T entity);
-    public T getById(Integer id);
-    public List<T> getAll();
-
+     void create(T entity);
+     void delete(T entity);
+     void edit(T entity);
+     T getById(Integer id);
+     List<T> getAll();
 }

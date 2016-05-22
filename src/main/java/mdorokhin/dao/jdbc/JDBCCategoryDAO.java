@@ -24,6 +24,7 @@ public class JDBCCategoryDAO implements BaseEntityDAO<Category> {
 
     @Override
     public void create(Category entity) {
+
         try {
             executor.executeUpdate("insert into categories (title) values ('"+ entity.getTitle() + "')");
         } catch (SQLException e) {
@@ -32,9 +33,10 @@ public class JDBCCategoryDAO implements BaseEntityDAO<Category> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Category entity) {
+
         try {
-            executor.executeUpdate("delete from categories where id = "+ id);
+            executor.executeUpdate("delete from categories where id = "+ entity.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,6 +44,7 @@ public class JDBCCategoryDAO implements BaseEntityDAO<Category> {
 
     @Override
     public void edit(Category entity) {
+
         try {
             executor.executeUpdate("update categories set title = '" + entity.getTitle()+ "' where id = "+ entity.getId());
         } catch (SQLException e) {
@@ -51,13 +54,11 @@ public class JDBCCategoryDAO implements BaseEntityDAO<Category> {
 
     @Override
     public Category getById(Integer id) {
+
         try {
-            return executor.executeQuery("select * from categories where id=" + id, new ResultHandler<Category>() {
-                @Override
-                public Category handle(ResultSet result) throws SQLException {
-                    result.next();
-                    return new Category(result.getInt(1), result.getString(2));
-                }
+            return executor.executeQuery("select * from categories where id=" + id, result -> {
+                result.next();
+                return new Category(result.getInt(1), result.getString(2));
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,14 +73,11 @@ public class JDBCCategoryDAO implements BaseEntityDAO<Category> {
         List<Category> categories = new ArrayList<>();
 
         try {
-            return executor.executeQuery("select * from categories", new ResultHandler<List<Category>>() {
-                @Override
-                public List<Category> handle(ResultSet result) throws SQLException {
+            return executor.executeQuery("select * from categories", result -> {
 
-                    while(result.next()){
-                        categories.add(new Category(result.getInt(1), result.getString(2)));}
-                    return categories ;
-                }
+                while(result.next()){
+                    categories.add(new Category(result.getInt(1), result.getString(2)));}
+                return categories ;
             });
         } catch (SQLException e) {
             e.printStackTrace();

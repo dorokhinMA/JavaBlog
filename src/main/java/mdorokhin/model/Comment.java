@@ -1,12 +1,23 @@
 package mdorokhin.model;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+
 /**
  * @author Maxim Dorokhin
  *         30.04.2016.
  */
+@Entity
+@Table(name = "comments")
 public class Comment extends BaseEntity {
 
+    @Column(name="body")
+    @Type(type="text")
     private String body;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private Post post;
 
     public Comment() {
@@ -14,9 +25,20 @@ public class Comment extends BaseEntity {
         this.post = new Post();
     }
 
+    public Comment(String body) {
+        this.body = body;
+        this.post = new Post();
+    }
+
     public Comment(String body, Post post) {
         this.body = body;
         this.post = post;
+    }
+
+    public Comment(Integer id, String body) {
+        this.id = id;
+        this.body = body;
+        this.post = new Post();
     }
 
     public Comment(Integer id, String body, Post post) {

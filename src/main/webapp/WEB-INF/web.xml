@@ -7,14 +7,13 @@
         <welcome-file>/jsp/index.jsp</welcome-file>
     </welcome-file-list>
 
-
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
 
     <servlet>
         <servlet-name>BlogServlet</servlet-name>
-        <servlet-class>mdorokhin.controller.BlogServlet</servlet-class>
+        <servlet-class>mdorokhin.controller.BlogController</servlet-class>
     </servlet>
     
     <servlet-mapping>

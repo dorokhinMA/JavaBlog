@@ -1,7 +1,10 @@
 package mdorokhin.dao.jdbc.connectservice;
 
-import mdorokhin.utils.DBPropertiesHandler;
-import mdorokhin.utils.PropertiesHelper;
+import mdorokhin.utils.propertiesHelper.DBPropertiesHandler;
+import mdorokhin.utils.propertiesHelper.PropertiesHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -13,14 +16,15 @@ import java.sql.SQLException;
  */
 public class ConnectionProviderImpl implements ConnectionProvider {
 
+    private static final Logger log = LoggerFactory.getLogger(ConnectionProviderImpl.class);
     private static ConnectionProvider connectionProvider;
     private PropertiesHelper propertiesHelper;
-    private String url;
+    private final String url;
     private final Connection connection;
 
 
     private ConnectionProviderImpl(){
-        this.propertiesHelper = new DBPropertiesHandler();
+        this.propertiesHelper = new DBPropertiesHandler("src/main/resources/jdbc_db.properties");
         this.url = loadURL();
         this.connection = initConnection();
     }
@@ -53,13 +57,13 @@ public class ConnectionProviderImpl implements ConnectionProvider {
         try {
             DriverManager.registerDriver((Driver) Class.forName(propertiesHelper.getProperty("driver")).newInstance());
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
+            log.debug("Can't register sql driver");
         }
             Connection connection = null;
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.debug("Can't get sql connection");
         }
         return connection;
 

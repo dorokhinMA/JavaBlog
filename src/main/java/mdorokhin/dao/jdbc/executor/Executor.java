@@ -1,5 +1,8 @@
 package mdorokhin.dao.jdbc.executor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +15,7 @@ import java.sql.Statement;
 public class Executor {
 
     private final Connection connection;
+    private static final Logger log = LoggerFactory.getLogger(Executor.class);
 
     public Executor(Connection connection) {
         this.connection = connection;
@@ -19,15 +23,19 @@ public class Executor {
 
     public void executeUpdate(String query) throws SQLException {
         Statement stmt = connection.createStatement();
+        log.debug("query: {}", query);
         stmt.execute(query);
+        log.debug("Execute query: {}", query);
         stmt.close();
     }
 
     public <T> T executeQuery(String query, ResultHandler<T> handler) throws SQLException {
         Statement stmt = connection.createStatement();
+        log.debug("query: {}", query);
         stmt.execute(query);
         ResultSet result = stmt.getResultSet();
         T value = handler.handle(result);
+        log.debug("Execute query: {}", query);
         result.close();
         stmt.close();
         return value;

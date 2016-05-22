@@ -10,6 +10,7 @@ import java.io.IOException;
  * @author Maxim Dorokhin
  *         07.05.2016.
  */
+
 public class BlogController extends HttpServlet {
 
 
@@ -18,7 +19,6 @@ public class BlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-
 
     }
 

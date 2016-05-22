@@ -5,4 +5,5 @@ package mdorokhin.model.userpack;
  *         17.05.2016.
  */
 public enum Role {
+    GUEST, USER, ADMIN
 }

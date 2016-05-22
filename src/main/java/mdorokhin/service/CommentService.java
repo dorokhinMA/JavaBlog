@@ -1,6 +1,9 @@
 package mdorokhin.service;
 
 import mdorokhin.model.Comment;
+import mdorokhin.model.Post;
+
+import java.util.List;
 
 /**
  * @author Maxim Dorokhin
@@ -10,5 +13,7 @@ public interface CommentService {
 
     void addComment(Comment comment);
     void deleteComment(Comment comment);
+    Comment getCommentById(Integer id);
+    List<Comment> getAllCommentByPost(Post post);
 
 }
