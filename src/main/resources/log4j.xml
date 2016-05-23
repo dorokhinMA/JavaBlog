@@ -24,10 +24,5 @@
         <appender-ref ref="consoleAppender"/>
     </category>
 
-    <category name="org.hibernate.type">
-        <priority value="debug"/>
-        <appender-ref ref="consoleAppender"/>
-    </category>
-
 
 </log4j:configuration>

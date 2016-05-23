@@ -1,9 +1,10 @@
 package mdorokhin.service.impl;
 
 import mdorokhin.dao.BaseEntityDAO;
-import mdorokhin.dao.jdbc.JDBCCommentDAO;
+import mdorokhin.dao.jdbc.daoImpl.JDBCCommentDAO;
+import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Comment;
-import mdorokhin.dao.jdbc.connectservice.ConnectionProviderImpl;
+import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.model.Post;
 import mdorokhin.service.CommentService;
 import mdorokhin.utils.transactionHelper.TransactionHelper;
@@ -23,43 +24,37 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
 
     private static final Logger log = LoggerFactory.getLogger(CommentServiceImpl.class);
-    private BaseEntityDAO<Comment> commentDAO;
-    private TransactionHelper transactionHelper;
+    private BaseEntityDAO<Comment, BaseEntity> commentDAO;
 
     public CommentServiceImpl() {
-        Connection connection = ConnectionProviderImpl.getInstance().getConnection();
-        commentDAO = new JDBCCommentDAO(connection);
-        this.transactionHelper = new TransactionHelperImpl(connection);
+        commentDAO = new JDBCCommentDAO();
     }
 
     @Override
     public void addComment(Comment comment) {
 
-        Runnable runnable = ()-> commentDAO.create(comment);
-        transactionHelper.doTransaction(runnable);
+        commentDAO.create(comment);
         log.debug("Comment has been added", comment);
     }
 
     @Override
     public void deleteComment(Comment comment) {
 
-        Runnable runnable = ()-> commentDAO.delete(comment);
-        transactionHelper.doTransaction(runnable);
+        commentDAO.delete(comment);
         log.debug("Comment has been deleted", comment);
     }
 
     @Override
     public Comment getCommentById(Integer id) {
 
-        Supplier<Comment> supplier = ()-> commentDAO.getById(id);
-        return (Comment) transactionHelper.doTransaction(supplier);
+        return commentDAO.getById(id);
     }
 
     @Override
     public List<Comment> getAllCommentByPost(Post post) {
 
-        Supplier<List<Comment>> supplier = ()-> commentDAO.getAll().stream().filter(comment -> comment.getPost().getId()==post.getId()).collect(Collectors.toList());
-        return (List<Comment>) transactionHelper.doTransaction(supplier);
+     //   commentDAO.getAll().stream().filter(comment -> comment.getPost().getId()==post.getId()).collect(Collectors.toList());
+        return commentDAO.getAll(post);
     }
 
 

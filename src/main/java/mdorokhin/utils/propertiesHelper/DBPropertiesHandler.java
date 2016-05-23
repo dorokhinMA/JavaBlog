@@ -27,7 +27,6 @@ public class DBPropertiesHandler implements PropertiesHelper {
             this.properties = new Properties();
             properties.load(fis);
             log.debug("Data base properties has loaded from: {}", path);
-
         }catch (IOException e) {
             log.debug("Error loading properties file from path: {}", path);
         }

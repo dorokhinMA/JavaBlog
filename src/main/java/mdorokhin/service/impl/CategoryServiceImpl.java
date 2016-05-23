@@ -1,9 +1,10 @@
 package mdorokhin.service.impl;
 
 import mdorokhin.dao.BaseEntityDAO;
-import mdorokhin.dao.jdbc.JDBCCategoryDAO;
+import mdorokhin.dao.jdbc.daoImpl.JDBCCategoryDAO;
+import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Category;
-import mdorokhin.dao.jdbc.connectservice.ConnectionProviderImpl;
+import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.service.CategoryService;
 import mdorokhin.utils.transactionHelper.TransactionHelper;
 import mdorokhin.utils.transactionHelper.TransactionHelperImpl;
@@ -21,44 +22,41 @@ import java.util.function.Supplier;
 public class CategoryServiceImpl implements CategoryService {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
-    private BaseEntityDAO<Category> categoryDAO;
-    private TransactionHelper transactionHelper;
+    private BaseEntityDAO<Category, BaseEntity> categoryDAO;
 
     public CategoryServiceImpl() {
-        Connection connection = ConnectionProviderImpl.getInstance().getConnection();
-        this.categoryDAO = new JDBCCategoryDAO(connection);
-        this.transactionHelper = new TransactionHelperImpl(connection);
+        this.categoryDAO = new JDBCCategoryDAO();
     }
 
     @Override
     public void addCategory(Category category) {
 
-        Runnable runnable = ()-> categoryDAO.create(category);
-        transactionHelper.doTransaction(runnable);
+        categoryDAO.create(category);
         log.debug("Category has been added {}", category);
     }
 
     @Override
-    public void deleteCategory(Category category) {
+    public void deleteCategoryWithPosts(Category category) {
 
-        Runnable runnable = ()-> categoryDAO.delete(category);
-        transactionHelper.doTransaction(runnable);
-        log.debug("Category has been deleted {}", category);
+    }
+
+    @Override
+    public void editCategory(Category category) {
+        categoryDAO.edit(category);
+        log.debug("Category has been edited {}", category);
     }
 
     @Override
     public Category getCategoryById(Integer id) {
 
-        Supplier<Category> supplier = ()-> categoryDAO.getById(id);
-        return (Category) transactionHelper.doTransaction(supplier);
+        return categoryDAO.getById(id);
     }
 
     @Override
-    public List<Category> getAllCategory() {
-
-        Supplier<List<Category>> supplier = ()-> categoryDAO.getAll();
-        return (List<Category>) transactionHelper.doTransaction(supplier);
+    public List<Category> getAllCategoryWithPosts() {
+        return null;
     }
+
 
 
 }

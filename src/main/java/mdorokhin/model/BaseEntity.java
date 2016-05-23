@@ -13,7 +13,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", unique = true)
+    @Column(name = "id", unique = true)
     protected int id;
 
     public int getId() {

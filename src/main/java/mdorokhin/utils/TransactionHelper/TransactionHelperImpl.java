@@ -38,7 +38,6 @@ public class TransactionHelperImpl implements TransactionHelper<Object> {
         } finally {
             try {
                 connection.setAutoCommit(true);
-                //connection.close();
             } catch (SQLException ignore) {
             }
         }

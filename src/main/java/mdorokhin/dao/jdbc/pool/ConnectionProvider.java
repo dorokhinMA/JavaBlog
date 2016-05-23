@@ -1,9 +1,7 @@
-package mdorokhin.dao.jdbc.connectservice;
+package mdorokhin.dao.jdbc.pool;
 
 import mdorokhin.utils.propertiesHelper.DBPropertiesHandler;
 import mdorokhin.utils.propertiesHelper.PropertiesHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -12,27 +10,23 @@ import java.sql.SQLException;
 
 /**
  * @author Maxim Dorokhin
- *         30.04.2016.
+ *         22.05.2016.
  */
-public class ConnectionProviderImpl implements ConnectionProvider {
+public class ConnectionProvider implements ConnectionPool {
 
-    private static final Logger log = LoggerFactory.getLogger(ConnectionProviderImpl.class);
     private static ConnectionProvider connectionProvider;
     private PropertiesHelper propertiesHelper;
-    private final String url;
-    private final Connection connection;
+    private String url;
 
-
-    private ConnectionProviderImpl(){
-        this.propertiesHelper = new DBPropertiesHandler("src/main/resources/jdbc_db.properties");
+    private ConnectionProvider(){
+        this.propertiesHelper = new DBPropertiesHandler("src/main/resources/jdbc.properties");
         this.url = loadURL();
-        this.connection = initConnection();
     }
 
-    public static ConnectionProvider getInstance(){
+    public static synchronized ConnectionProvider getInstance(){
 
         if (connectionProvider == null){
-            connectionProvider = new ConnectionProviderImpl();
+            connectionProvider = new ConnectionProvider();
         }
         return  connectionProvider;
     }
@@ -57,13 +51,13 @@ public class ConnectionProviderImpl implements ConnectionProvider {
         try {
             DriverManager.registerDriver((Driver) Class.forName(propertiesHelper.getProperty("driver")).newInstance());
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            log.debug("Can't register sql driver");
+            e.printStackTrace();
         }
-            Connection connection = null;
+        Connection connection = null;
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            log.debug("Can't get sql connection");
+            e.printStackTrace();
         }
         return connection;
 
@@ -71,6 +65,7 @@ public class ConnectionProviderImpl implements ConnectionProvider {
 
     @Override
     public Connection getConnection() {
-        return connection;
+
+        return initConnection();
     }
 }

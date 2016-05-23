@@ -1,5 +1,6 @@
 package mdorokhin.dao.jdbc.executor;
 
+import mdorokhin.dao.jdbc.util.DBUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +15,10 @@ import java.sql.Statement;
  */
 public class Executor {
 
-    private final Connection connection;
     private static final Logger log = LoggerFactory.getLogger(Executor.class);
+    private final Connection connection;
 
-    public Executor(Connection connection) {
+    public Executor(Connection connection){
         this.connection = connection;
     }
 
@@ -26,7 +27,7 @@ public class Executor {
         log.debug("query: {}", query);
         stmt.execute(query);
         log.debug("Execute query: {}", query);
-        stmt.close();
+        DBUtil.closeStatement(stmt);
     }
 
     public <T> T executeQuery(String query, ResultHandler<T> handler) throws SQLException {
@@ -36,8 +37,8 @@ public class Executor {
         ResultSet result = stmt.getResultSet();
         T value = handler.handle(result);
         log.debug("Execute query: {}", query);
-        result.close();
-        stmt.close();
+        DBUtil.closeResultSet(result);
+        DBUtil.closeStatement(stmt);
         return value;
     }
 }
