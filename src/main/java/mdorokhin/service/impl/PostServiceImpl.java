@@ -3,6 +3,7 @@ package mdorokhin.service.impl;
 import mdorokhin.dao.BaseEntityDAO;
 import mdorokhin.dao.jdbc.daoImpl.JDBCPostDAO;
 import mdorokhin.model.BaseEntity;
+import mdorokhin.model.Category;
 import mdorokhin.model.Post;
 import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.service.PostService;
@@ -59,6 +60,12 @@ public class PostServiceImpl implements PostService {
     public List<Post> getAllPost() {
 
         return postDAO.getAll();
+    }
+
+    @Override
+    public List<Post> getAllPostByCategory(Category category) {
+
+        return postDAO.getAll(category);
     }
 
 

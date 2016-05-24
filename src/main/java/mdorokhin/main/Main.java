@@ -6,8 +6,10 @@ import mdorokhin.dao.jdbc.daoImpl.JDBCPostDAO;
 import mdorokhin.model.Category;
 import mdorokhin.model.Comment;
 import mdorokhin.model.Post;
+import mdorokhin.service.CategoryService;
 import mdorokhin.service.CommentService;
 import mdorokhin.service.PostService;
+import mdorokhin.service.impl.CategoryServiceImpl;
 import mdorokhin.service.impl.CommentServiceImpl;
 import mdorokhin.service.impl.PostServiceImpl;
 import org.hibernate.Session;
@@ -53,14 +55,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        PostService postService = new PostServiceImpl();
-        Post post1 = postService.getPostById(1);
-      //  System.out.println(post1);
-        CommentService commentService = new CommentServiceImpl();
-        List<Comment> allCommentByPost = commentService.getAllCommentByPost(post1);
+//        PostService postService = new PostServiceImpl();
+//        Post post1 = postService.getPostById(1);
+//      //  System.out.println(post1);
+//        CommentService commentService = new CommentServiceImpl();
+//        List<Comment> allCommentByPost = commentService.getAllCommentByPost(post1);
+//
+//        allCommentByPost.forEach(System.out::println);
 
-        allCommentByPost.forEach(System.out::println);
-
-
+//        CategoryService categoryService = new CategoryServiceImpl();
+//        Category category2 = categoryService.getCategoryById(2);
+//        PostService postService = new PostServiceImpl();
+//        List<Post> allPostByCategory = postService.getAllPostByCategory(category2);
+//
+//        allPostByCategory.forEach(System.out::println);
     }
 }

@@ -1,5 +1,6 @@
 package mdorokhin.service;
 
+import mdorokhin.model.Category;
 import mdorokhin.model.Post;
 
 import java.util.List;
@@ -15,5 +16,6 @@ public interface PostService {
     void editPost(Post post);
     Post getPostById(Integer Id);
     List<Post> getAllPost();
+    List<Post> getAllPostByCategory(Category category);
 
 }

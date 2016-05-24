@@ -5,6 +5,7 @@ import mdorokhin.dao.jdbc.executor.Executor;
 import mdorokhin.dao.jdbc.util.DBUtil;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Category;
+import mdorokhin.model.Comment;
 import mdorokhin.model.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,7 +115,23 @@ public class JDBCPostDAO implements BaseEntityDAO<Post, BaseEntity> {
 
     @Override
     public List<Post> getAll(BaseEntity restriction) {
-        return null;
+        List<Post> posts = new ArrayList<>();
+        Connection connection = DBUtil.getConnection();
+        Executor executor = new Executor(connection);
+
+        try {
+            return executor.executeQuery("select p.id as post_id, p.title as post_title, summary, p.body as post_body, c.id as cat_id, c.title as cat_title  from posts p inner join categories c on p.category_id = c.id where category_id="+ restriction.getId(), result -> {
+
+                while(result.next()){
+                    posts.add(new Post(result.getInt(1), result.getString(2), result.getString(3), result.getString(4), new Category(result.getInt(5), result.getString(6))));}
+                return posts ;
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DBUtil.closeConnection(connection);
+        }
     }
 
 
