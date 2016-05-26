@@ -7,7 +7,7 @@
 
     <jsp:include page="/jsp/header.jsp"/>
 
-    <a href="./blog">Home</a><br/>
+    <a href="blog">Enter</a><br/>
 
 </body>
 </html>

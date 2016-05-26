@@ -63,11 +63,11 @@ public class Main {
 //
 //        allCommentByPost.forEach(System.out::println);
 
-//        CategoryService categoryService = new CategoryServiceImpl();
-//        Category category2 = categoryService.getCategoryById(2);
-//        PostService postService = new PostServiceImpl();
-//        List<Post> allPostByCategory = postService.getAllPostByCategory(category2);
-//
-//        allPostByCategory.forEach(System.out::println);
+        CategoryService categoryService = new CategoryServiceImpl();
+        Category category2 = categoryService.getCategoryById(2);
+        PostService postService = new PostServiceImpl();
+        List<Post> allPostByCategory = postService.getAllPostByCategory(category2);
+
+        allPostByCategory.forEach(System.out::println);
     }
 }

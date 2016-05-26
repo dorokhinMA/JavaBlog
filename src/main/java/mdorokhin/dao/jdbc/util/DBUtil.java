@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class DBUtil {
 
     private static final Logger log = LoggerFactory.getLogger(DBUtil.class);
-    static ConnectionPool connectionPool = ConnectionProvider.getInstance();
+    static ConnectionPool connectionPool = TomcatPool.getInstance();
 
     public static Connection getConnection() {
 

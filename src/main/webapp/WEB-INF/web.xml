@@ -26,6 +26,8 @@
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/blog/*</url-pattern>
+        <url-pattern>/blog</url-pattern>
+        <url-pattern>/new_post</url-pattern>
     </servlet-mapping>
 
 
