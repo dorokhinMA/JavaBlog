@@ -45,6 +45,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public void deleteCommentsByPost(Post post) {
+
+        commentDAO.getAll(post).forEach(this::deleteComment);
+    }
+
+    @Override
     public Comment getCommentById(Integer id) {
 
         return commentDAO.getById(id);
@@ -53,9 +59,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getAllCommentByPost(Post post) {
 
-     //   commentDAO.getAll().stream().filter(comment -> comment.getPost().getId()==post.getId()).collect(Collectors.toList());
         return commentDAO.getAll(post);
     }
+
+
 
 
 }

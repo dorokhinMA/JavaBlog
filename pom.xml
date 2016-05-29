@@ -14,7 +14,7 @@
 
     <properties>
         <mysqlconnector-version>5.1.38</mysqlconnector-version>
-        <servlet-api>3.1.0</servlet-api>
+        <servlet-api>3.0.1</servlet-api>
         <jstl>1.2</jstl>
         <org.springframework>4.2.5.RELEASE</org.springframework>
         <org.slf4j>1.7.12</org.slf4j>

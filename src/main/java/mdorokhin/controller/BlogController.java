@@ -10,7 +10,6 @@ import mdorokhin.service.impl.CategoryServiceImpl;
 import mdorokhin.service.impl.CommentServiceImpl;
 import mdorokhin.service.impl.PostServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,7 @@ public class BlogController extends HttpServlet {
         String url = request.getRequestURL().toString();
 
         if(url.contains("new_post")){
-            List<Category> categories = categoryService.getAllCategoryWithPosts();
+            List<Category> categories = categoryService.getAllCategory();
             request.setAttribute("categories", categories);
             getServletContext().getRequestDispatcher("/jsp/newPost.jsp").forward(request, response);
             return;
@@ -54,12 +53,13 @@ public class BlogController extends HttpServlet {
             if ("edit".equals(action)){
                 Post editablePost = postService.getPostById(Integer.parseInt(postId));
                 request.setAttribute("editablePost", editablePost);
-                List<Category> categories = categoryService.getAllCategoryWithPosts();
+                List<Category> categories = categoryService.getAllCategory();
                 request.setAttribute("categories", categories);
                 getServletContext().getRequestDispatcher("/jsp/newPost.jsp").forward(request, response);
 
             } else if ("delete".equals(action)) {
                 Post delPost = postService.getPostById(Integer.parseInt(postId));
+                commentService.deleteCommentsByPost(delPost);
                 postService.deletePost(delPost);
                 response.sendRedirect("./blog");
 
@@ -75,18 +75,18 @@ public class BlogController extends HttpServlet {
             if (categoryId != null){
                 List<Post> allPosts = postService.getAllPostByCategory(categoryService.getCategoryById(Integer.parseInt(categoryId)));
                 request.setAttribute("allPosts", allPosts);
+                List<Category> allCategory = categoryService.getAllCategory();
+                request.setAttribute("categories", allCategory);
                 getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
             } else {
                 List<Post> allPosts = postService.getAllPost();
                 request.setAttribute("allPosts", allPosts);
-                List<Category> allCategory = categoryService.getAllCategoryWithPosts();
+                List<Category> allCategory = categoryService.getAllCategory();
                 request.setAttribute("categories", allCategory);
                 getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
             }
         }
-
-       // response.setStatus(HttpServletResponse.SC_OK);
-
+                // response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override

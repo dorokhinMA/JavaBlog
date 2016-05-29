@@ -53,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getAllCategoryWithPosts() {
+    public List<Category> getAllCategory() {
         return categoryDAO.getAll();
     }
 

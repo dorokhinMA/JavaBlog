@@ -14,6 +14,6 @@ public interface CategoryService {
     void deleteCategoryWithPosts(Category category);
     void editCategory(Category category);
     Category getCategoryById(Integer id);
-    List<Category> getAllCategoryWithPosts();
+    List<Category> getAllCategory();
 
 }
