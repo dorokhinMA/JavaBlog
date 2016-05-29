@@ -30,7 +30,7 @@
             </td>
 
 
-            <td  valign="top" style="background-color: #2f82b5">
+            <td  valign="top" style="background-color: cadetblue">
                 <h2>Categories:</h2>
                 <ul>
                     <%--@elvariable id="categories" type="java.util.List"--%>

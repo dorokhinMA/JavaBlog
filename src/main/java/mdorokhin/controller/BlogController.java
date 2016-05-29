@@ -1,6 +1,7 @@
 package mdorokhin.controller;
 
 import mdorokhin.model.Category;
+import mdorokhin.model.Comment;
 import mdorokhin.model.Post;
 import mdorokhin.service.CategoryService;
 import mdorokhin.service.CommentService;
@@ -34,6 +35,9 @@ public class BlogController extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
 
+        String postId = request.getParameter("post");
+        String categoryId = request.getParameter("category");
+        String action = request.getParameter("action");
         String url = request.getRequestURL().toString();
 
         if(url.contains("new_post")){
@@ -43,15 +47,43 @@ public class BlogController extends HttpServlet {
             return;
         }
 
-        List<Post> allPosts = postService.getAllPost();
-        request.setAttribute("allPosts", allPosts);
+        if (postId != null){
 
-        List<Category> allCategory = categoryService.getAllCategoryWithPosts();
-        request.setAttribute("categories", allCategory);
+            if ("edit".equals(action)){
+                Post editablePost = postService.getPostById(Integer.parseInt(postId));
+                request.setAttribute("editablePost", editablePost);
+                List<Category> categories = categoryService.getAllCategoryWithPosts();
+                request.setAttribute("categories", categories);
+                getServletContext().getRequestDispatcher("/jsp/newPost.jsp").forward(request, response);
 
+            } else if ("delete".equals(action)) {
+                Post delPost = postService.getPostById(Integer.parseInt(postId));
+                postService.deletePost(delPost);
+                response.sendRedirect("./blog");
 
-        getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
-        response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                Post postById = postService.getPostById(Integer.parseInt(postId));
+                List<Comment> allCommentByPost = commentService.getAllCommentByPost(postById);
+                request.setAttribute("post", postById);
+                request.setAttribute("comments", allCommentByPost);
+                getServletContext().getRequestDispatcher("/jsp/post.jsp").forward(request, response);
+            }
+        } else {
+
+            if (categoryId != null){
+                List<Post> allPosts = postService.getAllPostByCategory(categoryService.getCategoryById(Integer.parseInt(categoryId)));
+                request.setAttribute("allPosts", allPosts);
+                getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
+            } else {
+                List<Post> allPosts = postService.getAllPost();
+                request.setAttribute("allPosts", allPosts);
+                List<Category> allCategory = categoryService.getAllCategoryWithPosts();
+                request.setAttribute("categories", allCategory);
+                getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
+            }
+        }
+
+       // response.setStatus(HttpServletResponse.SC_OK);
 
     }
 
@@ -59,5 +91,21 @@ public class BlogController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        String title = request.getParameter("title");
+        String summary = request.getParameter("summary");
+        String body = request.getParameter("body");
+        String category = request.getParameter("category");
+
+        Category categoryById = categoryService.getCategoryById(Integer.parseInt(category));
+
+        postService.addPost(new Post(title, summary, body, categoryById));
+
+
+        response.sendRedirect("./blog");
+
+
     }
 }
