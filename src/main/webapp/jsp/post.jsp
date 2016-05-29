@@ -9,8 +9,9 @@
 
 <jsp:include page="/jsp/header.jsp"/>
 
-<a href="blog?action=edit&post=${post.id}">Edit post</a><br/>
-<a href="blog?action=delete&post=${post.id}">Delete post</a><br/>
+<a href="blog?action=edit&post=${post.id}"><img src="icon/pencil.png" width="30" height="30" alt="Edit post">Edit post</a><br/>
+
+<a href="blog?action=delete&post=${post.id}"><img src="icon/delete.png" width="30" height="30" alt="Delete post">Delete post</a><br/>
 
 <span style="font-size: 32px; color: black">${post.title}</span>
 

@@ -34,6 +34,8 @@ public class BlogController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         String postId = request.getParameter("post");
         String categoryId = request.getParameter("category");
@@ -94,17 +96,23 @@ public class BlogController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        String id = request.getParameter("id");
         String title = request.getParameter("title");
         String summary = request.getParameter("summary");
         String body = request.getParameter("body");
         String category = request.getParameter("category");
+        String action = request.getParameter("mode");
 
-        Category categoryById = categoryService.getCategoryById(Integer.parseInt(category));
+        if("editable".equals(action)){
+            Category categoryById = categoryService.getCategoryById(Integer.parseInt(category));
+            postService.editPost(new Post(Integer.parseInt(id), title, summary, body, categoryById));
+            response.sendRedirect("./blog");
 
-        postService.addPost(new Post(title, summary, body, categoryById));
-
-
-        response.sendRedirect("./blog");
+        } else {
+            Category categoryById = categoryService.getCategoryById(Integer.parseInt(category));
+            postService.addPost(new Post(title, summary, body, categoryById));
+            response.sendRedirect("./blog");
+        }
 
 
     }

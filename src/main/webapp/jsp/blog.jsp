@@ -12,7 +12,7 @@
 
     <table width="100%">
         <tr>
-            <td colspan="2" align="right"><a href="new_post">Create Post</a></td>
+            <td colspan="2" align="right"><a href="new_post"><img src="icon/add.png" width="50" height="50" alt="Create post">Create post</a></td>
         </tr>
 
         <tr>
@@ -30,7 +30,7 @@
             </td>
 
 
-            <td  valign="top" style="background-color: cadetblue">
+            <td  valign="top" style="background-color: darkgrey">
                 <h2>Categories:</h2>
                 <ul>
                     <%--@elvariable id="categories" type="java.util.List"--%>
