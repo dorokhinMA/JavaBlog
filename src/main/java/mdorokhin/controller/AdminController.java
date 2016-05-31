@@ -37,7 +37,7 @@ public class AdminController extends HttpServlet {
         String action = request.getParameter("action");
         String categoryId = request.getParameter("category");
 
-        if ("categories".equals(mode)){
+        if ("categories".equals(mode) || categoryId != null){
 
             if("edit".equals(action)){
                 categoryService.editCategory(categoryService.getCategoryById(Integer.parseInt(categoryId)));
