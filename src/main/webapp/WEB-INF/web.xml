@@ -22,6 +22,11 @@
         <servlet-name>BlogController</servlet-name>
         <servlet-class>mdorokhin.controller.BlogController</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>mdorokhin.controller.AdminController</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
@@ -30,11 +35,10 @@
         <url-pattern>/new_post</url-pattern>
     </servlet-mapping>
 
-
-
-
-
-
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

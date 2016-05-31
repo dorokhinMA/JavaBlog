@@ -36,12 +36,15 @@
         <p>Category:</p>
     <select name="category">
         <c:forEach items="${categories}" var="category">
-            <option value="${category.id}">${category.title}</option>
+            <option
+                    <c:if test="${category.id == editablePost.category.id}">selected ="selected"</c:if>
+                    value="${category.id}">${category.title}
+            </option>
         </c:forEach>
     </select>
     </label>
 
-    <input type ="submit" name="Create">
+    <input type ="submit" name="Create" value="Create">
 
 </form>
 

@@ -108,12 +108,14 @@ public class BlogController extends HttpServlet {
             postService.editPost(new Post(Integer.parseInt(id), title, summary, body, categoryById));
             response.sendRedirect("./blog");
 
+        } else if ("addComment".equals(action)){
+            commentService.addComment(new Comment(body, postService.getPostById(Integer.parseInt(id))));
+            response.sendRedirect("./blog?post="+id);
+
         } else {
             Category categoryById = categoryService.getCategoryById(Integer.parseInt(category));
             postService.addPost(new Post(title, summary, body, categoryById));
             response.sendRedirect("./blog");
         }
-
-
     }
 }

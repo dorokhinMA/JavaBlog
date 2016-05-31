@@ -24,15 +24,27 @@
     <tr>
         <td width="70%" valign="top">
             <h3>Comments:</h3>
-            
-            <%--@elvariable id="comments" type="java.util.List"--%>
+
             <c:forEach items="${comments}" var="comments">
                 <p>${comments.body}</p>
                 <hr/>
             </c:forEach>
 
         </td>
+    </tr>
+</table>
 
+<form action="blog" method="post">
+
+    <label>
+        <p>Add comment:</p><br/>
+        <textarea rows="10" cols="45" name="body" required></textarea>
+    </label><br/>
+    <input type="hidden" name="mode" value="addComment">
+    <input type="hidden" name="id" value="${post.id}">
+
+    <input type ="submit" name="Add" value="Add">
+</form>
 
 </body>
 </html>

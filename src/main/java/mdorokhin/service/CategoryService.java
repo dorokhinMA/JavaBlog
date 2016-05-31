@@ -11,7 +11,7 @@ import java.util.List;
 public interface CategoryService {
 
     void addCategory(Category category);
-    void deleteCategoryWithPosts(Category category);
+    void deleteCategory(Category category);
     void editCategory(Category category);
     Category getCategoryById(Integer id);
     List<Category> getAllCategory();

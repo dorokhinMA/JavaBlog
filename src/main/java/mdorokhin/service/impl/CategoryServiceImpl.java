@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategoryWithPosts(Category category) {
+    public void deleteCategory(Category category) {
 
     }
 
