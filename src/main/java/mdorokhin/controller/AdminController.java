@@ -40,9 +40,14 @@ public class AdminController extends HttpServlet {
         if ("categories".equals(mode) || categoryId != null){
 
             if("edit".equals(action)){
-                categoryService.editCategory(categoryService.getCategoryById(Integer.parseInt(categoryId)));
-                response.sendRedirect("./admin?mode=categories");
+
+                Category editableCategory = categoryService.getCategoryById(Integer.parseInt(categoryId));
+                request.setAttribute("editableCategory", editableCategory );
+                getServletContext().getRequestDispatcher("/jsp/admin/categories_page.jsp").forward(request, response);
+                response.setStatus(HttpServletResponse.SC_OK);
+
             } else if ("delete".equals(action)){
+
                 Category categoryById = categoryService.getCategoryById(Integer.parseInt(categoryId));
                 postService.getAllPostByCategory(categoryById).forEach((a)-> postService.deletePost(a));
                 categoryService.deleteCategory(categoryById);
@@ -80,11 +85,15 @@ public class AdminController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        String id = request.getParameter("id");
         String action = request.getParameter("action");
         String title = request.getParameter("title");
 
         if("addCategory".equals(action)){
             categoryService.addCategory(new Category(title));
+            response.sendRedirect("./admin?mode=categories");
+        } else if ("editCategory".equals(action)){
+            categoryService.editCategory(new Category(Integer.parseInt(id), title));
             response.sendRedirect("./admin?mode=categories");
         }
 

@@ -30,12 +30,24 @@
 
     <form action="admin" method="post">
 
+        <c:if test="${editableCategory ne null}">
+            <c:set var="action" value="editCategory"/>
+            <c:set var="id" value="${editableCategory.id}"/>
+            <c:set var="button" value="Edit"/>
+        </c:if>
+
+        <c:if test="${editableCategory eq null}">
+            <c:set var="action" value="addCategory"/>
+            <c:set var="button" value="Add"/>
+        </c:if>
+        <input type="hidden" name="id" value="${id}">
+
         <label>
-            <p>Add new category:</p><br/>
-            <textarea rows="5" cols="50" name="title" required></textarea>
+            <p>${button} category:</p><br/>
+            <textarea rows="5" cols="50" name="title" required><c:out value="${editableCategory.title}"/></textarea>
         </label>
-        <input type="hidden" name="action" value="addCategory">
-        <input type ="submit" name="Add" value="Add">
+        <input type="hidden" name="action" value="${action}">
+        <input type ="submit" name="Add" value="${button}">
     </form>
 
 </body>
