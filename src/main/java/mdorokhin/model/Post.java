@@ -65,6 +65,15 @@ public class Post extends BaseEntity {
         this.comments = new ArrayList<>();
     }
 
+    public Post(Integer id) {
+        this.id = id;
+        this.title = "";
+        this.summary = "";
+        this.body = "";
+        this.category = new Category();
+        this.comments = new ArrayList<>();
+    }
+
     public Post(Integer id, String title, String summary, String body, Category category, List<Comment> comments) {
         this.id = id;
         this.title = title;

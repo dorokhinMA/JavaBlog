@@ -9,11 +9,13 @@
 
 <jsp:include page="/jsp/header.jsp"/>
 
-<a href="blog?action=edit&post=${post.id}"><img src="icon/pencil.png" width="30" height="30" alt="Edit post">Edit post</a><br/>
+<span style="font-size: 32px; color: black">${post.title}
 
-<a href="blog?action=delete&post=${post.id}"><img src="icon/delete.png" width="30" height="30" alt="Delete post">Delete post</a><br/>
+<a href="blog?action=edit&post=${post.id}"><img src="icon/pencil.png" width="30" height="30" alt="Edit post" title="Edit post"></a>
 
-<span style="font-size: 32px; color: black">${post.title}</span>
+<a href="blog?action=delete&post=${post.id}"><img src="icon/delete.png" width="30" height="30" alt="Delete post" title="Delete post"></a><br/>
+
+</span>
 
 <p>${post.summary}</p>
 <hr/>

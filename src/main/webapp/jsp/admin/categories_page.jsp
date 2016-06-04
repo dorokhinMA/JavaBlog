@@ -16,11 +16,11 @@
 
 
 
-    <c:forEach items="${allCategories}" var="cat">
+    <c:forEach items="${allCategories}" var="comment">
         <tr>
-        <td style="background: #e6e6fa; width: 70%;">${cat.title}</td>
-        <td style="background: #6495ed;"><a href="admin?action=edit&category=${cat.id}"><img src="icon/pencil.png" width="30" height="30" alt="Edit category" title="edit"></a></td>
-        <td style="background: #f08080;"><a href="admin?action=delete&category=${cat.id}"><img src="icon/delete.png" width="30" height="30" alt="delete category" title="delete"></a></td>
+        <td style="background: #e6e6fa; width: 70%;">${comment.title}</td>
+        <td style="background: #6495ed;"><a href="admin?action=edit&category=${comment.id}"><img src="icon/pencil.png" width="30" height="30" alt="Edit category" title="edit"></a></td>
+        <td style="background: #f08080;"><a href="admin?action=delete&category=${comment.id}"><img src="icon/delete.png" width="30" height="30" alt="delete category" title="delete"></a></td>
         </tr>
     </c:forEach>
 

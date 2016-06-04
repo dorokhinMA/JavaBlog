@@ -11,9 +11,6 @@
     <jsp:include page="/jsp/header.jsp"/>
 
     <table width="100%">
-        <tr>
-            <td colspan="2" align="right"><a href="new_post"><img src="icon/add.png" width="50" height="50" alt="Create post">Create post</a></td>
-        </tr>
 
         <tr>
             <td width="70%" valign="top">

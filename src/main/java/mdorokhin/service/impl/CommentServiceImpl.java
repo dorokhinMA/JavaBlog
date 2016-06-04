@@ -62,7 +62,11 @@ public class CommentServiceImpl implements CommentService {
         return commentDAO.getAll(post);
     }
 
+    @Override
+    public List<Comment> getAll() {
 
+        return commentDAO.getAll();
+    }
 
 
 }

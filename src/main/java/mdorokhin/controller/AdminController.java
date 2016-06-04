@@ -1,6 +1,8 @@
 package mdorokhin.controller;
 
 import mdorokhin.model.Category;
+import mdorokhin.model.Comment;
+import mdorokhin.model.Post;
 import mdorokhin.service.CategoryService;
 import mdorokhin.service.CommentService;
 import mdorokhin.service.PostService;
@@ -21,9 +23,9 @@ import java.util.List;
  */
 public class AdminController extends HttpServlet {
 
-    PostService postService = new PostServiceImpl();
-    CategoryService categoryService = new CategoryServiceImpl();
-    CommentService commentService = new CommentServiceImpl();
+    final PostService postService = new PostServiceImpl();
+    final CategoryService categoryService = new CategoryServiceImpl();
+    final CommentService commentService = new CommentServiceImpl();
 
 
     @Override
@@ -36,6 +38,8 @@ public class AdminController extends HttpServlet {
         String mode = request.getParameter("mode");
         String action = request.getParameter("action");
         String categoryId = request.getParameter("category");
+        String commentId = request.getParameter("comment");
+
 
         if ("categories".equals(mode) || categoryId != null){
 
@@ -49,7 +53,9 @@ public class AdminController extends HttpServlet {
             } else if ("delete".equals(action)){
 
                 Category categoryById = categoryService.getCategoryById(Integer.parseInt(categoryId));
-                postService.getAllPostByCategory(categoryById).forEach((a)-> postService.deletePost(a));
+                List<Post> allPostByCategory = postService.getAllPostByCategory(categoryById);
+                allPostByCategory.forEach(commentService::deleteCommentsByPost);
+                allPostByCategory.forEach(postService::deletePost);
                 categoryService.deleteCategory(categoryById);
                 response.sendRedirect("./admin?mode=categories");
 
@@ -66,12 +72,24 @@ public class AdminController extends HttpServlet {
             getServletContext().getRequestDispatcher("/jsp/admin/posts_page.jsp").forward(request, response);
             response.setStatus(HttpServletResponse.SC_OK);
 
-        } else if ("comments".equals(mode)){
+        } else if ("comments".equals(mode) || commentId != null){
 
-            getServletContext().getRequestDispatcher("/jsp/admin/comments_page.jsp").forward(request, response);
-            response.setStatus(HttpServletResponse.SC_OK);
+            if ("delete".equals(action)){
+
+                commentService.deleteComment(commentService.getCommentById(Integer.parseInt(commentId)));
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.sendRedirect("./admin?mode=comments");
+
+            }else {
+
+                List<Comment> commentList = commentService.getAll();
+                request.setAttribute("commentList", commentList);
+                getServletContext().getRequestDispatcher("/jsp/admin/comments_page.jsp").forward(request, response);
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
 
         } else {
+
             getServletContext().getRequestDispatcher("/jsp/admin/admin_page.jsp").forward(request, response);
             response.setStatus(HttpServletResponse.SC_OK);
         }

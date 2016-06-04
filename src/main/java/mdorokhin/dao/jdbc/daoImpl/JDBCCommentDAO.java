@@ -5,6 +5,7 @@ import mdorokhin.dao.jdbc.executor.Executor;
 import mdorokhin.dao.jdbc.util.DBUtil;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Comment;
+import mdorokhin.model.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,7 +100,8 @@ public class JDBCCommentDAO implements BaseEntityDAO<Comment, BaseEntity> {
             return executor.executeQuery("select * from comments", result -> {
 
                 while(result.next()){
-                    comments.add(new Comment(result.getInt(1), result.getString(2)));}
+                    Comment comment =  new Comment(result.getInt(1), result.getString(2), new Post(result.getInt(3)));
+                    comments.add(comment);}
                 return comments ;
             });
         } catch (SQLException e) {

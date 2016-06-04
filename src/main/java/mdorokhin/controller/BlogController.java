@@ -24,9 +24,9 @@ import java.util.List;
 
 public class BlogController extends HttpServlet {
 
-    PostService postService = new PostServiceImpl();
-    CategoryService categoryService = new CategoryServiceImpl();
-    CommentService commentService = new CommentServiceImpl();
+    final PostService postService = new PostServiceImpl();
+    final CategoryService categoryService = new CategoryServiceImpl();
+    final CommentService commentService = new CommentServiceImpl();
 
 
     @Override
