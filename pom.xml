@@ -18,7 +18,6 @@
         <jstl>1.2</jstl>
         <org.springframework>4.2.5.RELEASE</org.springframework>
         <org.slf4j>1.7.12</org.slf4j>
-        <hibernate>4.3.7.Final</hibernate>
     </properties>
 
 
@@ -28,12 +27,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysqlconnector-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate}</version>
         </dependency>
 
         <dependency>

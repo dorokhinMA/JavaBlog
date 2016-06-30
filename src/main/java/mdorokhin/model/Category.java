@@ -1,6 +1,5 @@
 package mdorokhin.model;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,14 +7,9 @@ import java.util.List;
  * @author Maxim Dorokhin
  *         30.04.2016.
  */
-@Entity
-@Table(name = "categories")
 public class Category extends BaseEntity {
 
-    @Column(name="title", unique = true)
     private String title;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
     private List<Post> posts;
 
     public Category() {

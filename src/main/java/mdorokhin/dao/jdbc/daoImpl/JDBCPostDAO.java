@@ -2,10 +2,9 @@ package mdorokhin.dao.jdbc.daoImpl;
 
 import mdorokhin.dao.BaseEntityDAO;
 import mdorokhin.dao.jdbc.executor.Executor;
-import mdorokhin.dao.jdbc.util.DBUtil;
+import mdorokhin.dao.jdbc.utils.DBUtil;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Category;
-import mdorokhin.model.Comment;
 import mdorokhin.model.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

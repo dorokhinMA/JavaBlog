@@ -1,4 +1,4 @@
-package mdorokhin.utils.propertiesHelper;
+package mdorokhin.dao.jdbc.utils.propertiesHelper;
 
 /**
  * @author Maxim Dorokhin

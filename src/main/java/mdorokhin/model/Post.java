@@ -1,8 +1,5 @@
 package mdorokhin.model;
 
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,26 +7,12 @@ import java.util.List;
  * @author Maxim Dorokhin
  *         30.04.2016.
  */
-@Entity
-@Table(name="posts")
 public class Post extends BaseEntity {
 
-    @Column(name = "title")
     private String title;
-
-    @Column(name="summary")
-    @Type(type="text")
     private String summary;
-
-    @Column(name="body")
-    @Type(type="text")
     private String body;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
     private Category category;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
     private List<Comment> comments;
 
     public Post() {

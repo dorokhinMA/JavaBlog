@@ -1,6 +1,6 @@
 package mdorokhin.dao.jdbc.executor;
 
-import mdorokhin.dao.jdbc.util.DBUtil;
+import mdorokhin.dao.jdbc.utils.DBUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

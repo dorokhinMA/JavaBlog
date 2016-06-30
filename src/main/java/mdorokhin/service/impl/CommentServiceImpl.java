@@ -4,18 +4,11 @@ import mdorokhin.dao.BaseEntityDAO;
 import mdorokhin.dao.jdbc.daoImpl.JDBCCommentDAO;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Comment;
-import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.model.Post;
 import mdorokhin.service.CommentService;
-import mdorokhin.utils.transactionHelper.TransactionHelper;
-import mdorokhin.utils.transactionHelper.TransactionHelperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * @author Maxim Dorokhin

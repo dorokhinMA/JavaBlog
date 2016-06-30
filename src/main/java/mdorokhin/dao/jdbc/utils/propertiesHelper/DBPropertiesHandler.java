@@ -1,4 +1,4 @@
-package mdorokhin.utils.propertiesHelper;
+package mdorokhin.dao.jdbc.utils.propertiesHelper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

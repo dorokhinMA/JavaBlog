@@ -1,7 +1,7 @@
 package mdorokhin.dao.jdbc.pool;
 
-import mdorokhin.utils.propertiesHelper.DBPropertiesHandler;
-import mdorokhin.utils.propertiesHelper.PropertiesHelper;
+import mdorokhin.dao.jdbc.utils.propertiesHelper.DBPropertiesHandler;
+import mdorokhin.dao.jdbc.utils.propertiesHelper.PropertiesHelper;
 
 import java.sql.Connection;
 import java.sql.Driver;

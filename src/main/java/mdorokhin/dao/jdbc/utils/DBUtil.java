@@ -1,7 +1,6 @@
-package mdorokhin.dao.jdbc.util;
+package mdorokhin.dao.jdbc.utils;
 
 import mdorokhin.dao.jdbc.pool.ConnectionPool;
-import mdorokhin.dao.jdbc.pool.ConnectionProvider;
 import mdorokhin.dao.jdbc.pool.TomcatPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

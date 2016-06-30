@@ -4,16 +4,10 @@ import mdorokhin.dao.BaseEntityDAO;
 import mdorokhin.dao.jdbc.daoImpl.JDBCCategoryDAO;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Category;
-import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.service.CategoryService;
-import mdorokhin.utils.transactionHelper.TransactionHelper;
-import mdorokhin.utils.transactionHelper.TransactionHelperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * @author Maxim Dorokhin
@@ -48,7 +42,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryById(Integer id) {
-
         return categoryDAO.getById(id);
     }
 

@@ -5,16 +5,10 @@ import mdorokhin.dao.jdbc.daoImpl.JDBCPostDAO;
 import mdorokhin.model.BaseEntity;
 import mdorokhin.model.Category;
 import mdorokhin.model.Post;
-import mdorokhin.dao.jdbc.pool.TomcatPool;
 import mdorokhin.service.PostService;
-import mdorokhin.utils.transactionHelper.TransactionHelper;
-import mdorokhin.utils.transactionHelper.TransactionHelperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * @author Maxim Dorokhin
