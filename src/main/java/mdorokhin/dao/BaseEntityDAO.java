@@ -1,7 +1,6 @@
 package mdorokhin.dao;
 
 import mdorokhin.model.BaseEntity;
-
 import java.util.List;
 
 /**

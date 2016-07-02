@@ -9,7 +9,6 @@ import mdorokhin.service.PostService;
 import mdorokhin.service.impl.CategoryServiceImpl;
 import mdorokhin.service.impl.CommentServiceImpl;
 import mdorokhin.service.impl.PostServiceImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +21,12 @@ import java.util.List;
  *         07.05.2016.
  */
 
+
 public class BlogController extends HttpServlet {
 
-    final PostService postService = new PostServiceImpl();
-    final CategoryService categoryService = new CategoryServiceImpl();
-    final CommentService commentService = new CommentServiceImpl();
-
+    private final PostService postService = new PostServiceImpl();
+    private final CategoryService categoryService = new CategoryServiceImpl();
+    private final CommentService commentService = new CommentServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -77,16 +76,18 @@ public class BlogController extends HttpServlet {
                 request.setAttribute("allPosts", allPosts);
                 List<Category> allCategory = categoryService.getAllCategory();
                 request.setAttribute("categories", allCategory);
+                response.setStatus(HttpServletResponse.SC_OK);
                 getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
+
             } else {
                 List<Post> allPosts = postService.getAllPost();
                 request.setAttribute("allPosts", allPosts);
                 List<Category> allCategory = categoryService.getAllCategory();
                 request.setAttribute("categories", allCategory);
+                response.setStatus(HttpServletResponse.SC_OK);
                 getServletContext().getRequestDispatcher("/jsp/blog.jsp").forward(request,response);
             }
         }
-                // response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override

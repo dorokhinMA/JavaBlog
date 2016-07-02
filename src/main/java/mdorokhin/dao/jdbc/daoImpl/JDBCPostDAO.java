@@ -21,9 +21,7 @@ public class JDBCPostDAO implements BaseEntityDAO<Post, BaseEntity> {
 
     private static final Logger log = LoggerFactory.getLogger(JDBCPostDAO.class);
 
-    public JDBCPostDAO() {
-
-    }
+    public JDBCPostDAO() {}
 
     @Override
     public void create(Post entity) {

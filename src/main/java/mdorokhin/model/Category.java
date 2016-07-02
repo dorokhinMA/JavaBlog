@@ -13,24 +13,19 @@ public class Category extends BaseEntity {
     private List<Post> posts;
 
     public Category() {
-        this.id = 0;
-        this.title = "";
-        this.posts = new ArrayList<>();
+        this(0, "", new ArrayList<>());
     }
 
     public Category(String title) {
-        this.title = title;
-        this.posts = new ArrayList<>();
+        this(0, title, new ArrayList<>());
     }
 
     public Category(Integer id, String title) {
-        this.id = id;
-        this.title = title;
-        this.posts = new ArrayList<>();
+        this(id, title, new ArrayList<>());
     }
 
     public Category(Integer id, String title, List<Post> posts) {
-        this.id = id;
+        super(id);
         this.title = title;
         this.posts = posts;
     }

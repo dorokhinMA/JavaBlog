@@ -15,8 +15,6 @@
         <tr>
             <td width="70%" valign="top">
                 <h2>Posts:</h2>
-
-                <%--@elvariable id="allPosts" type="java.util.List"--%>
                 <c:forEach items="${allPosts}" var="post">
                     <h1>${post.title}</h1>
                     <p>${post.summary}</p>
@@ -30,7 +28,6 @@
             <td  valign="top" style="background-color: darkgrey">
                 <h2>Categories:</h2>
                 <ul>
-                    <%--@elvariable id="categories" type="java.util.List"--%>
                     <c:forEach items="${categories}" var="category">
                         <li><a href="blog?category=${category.id}">${category.title}</a></li>
                     </c:forEach>

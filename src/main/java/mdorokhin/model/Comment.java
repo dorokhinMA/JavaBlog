@@ -10,28 +10,23 @@ public class Comment extends BaseEntity {
     private Post post;
 
     public Comment() {
-        this.body = "";
-        this.post = new Post();
+        this(0, "", new Post());
     }
 
     public Comment(String body) {
-        this.body = body;
-        this.post = new Post();
+        this(0, body, new Post());
     }
 
     public Comment(String body, Post post) {
-        this.body = body;
-        this.post = post;
+        this(0, body, post);
     }
 
     public Comment(Integer id, String body) {
-        this.id = id;
-        this.body = body;
-        this.post = new Post();
+        this(id, body, new Post());
     }
 
     public Comment(Integer id, String body, Post post) {
-        this.id = id;
+        super(id);
         this.body = body;
         this.post = post;
     }

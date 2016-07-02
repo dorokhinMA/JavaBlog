@@ -22,9 +22,12 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryDAO = new JDBCCategoryDAO();
     }
 
+    public CategoryServiceImpl(BaseEntityDAO<Category, BaseEntity> categoryDAO) {
+        this.categoryDAO = categoryDAO;
+    }
+
     @Override
     public void addCategory(Category category) {
-
         categoryDAO.create(category);
         log.debug("Category has been added {}", category);
     }
@@ -49,7 +52,6 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllCategory() {
         return categoryDAO.getAll();
     }
-
 
 
 }

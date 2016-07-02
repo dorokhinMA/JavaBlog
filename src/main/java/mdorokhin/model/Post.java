@@ -16,49 +16,27 @@ public class Post extends BaseEntity {
     private List<Comment> comments;
 
     public Post() {
-        this.title = "";
-        this.summary = "";
-        this.body = "";
-        this.category = new Category();
-        this.comments = new ArrayList<>();
+        this(0, "", "", "", new Category(), new ArrayList<>());
     }
 
     public Post(String title, String summary, String body, Category category) {
-        this.title = title;
-        this.summary = summary;
-        this.body = body;
-        this.category = category;
-        this.comments = new ArrayList<>();
+        this(0, title, summary, body, category, new ArrayList<>());
     }
 
     public Post(String title, String summary, String body, Category category, List<Comment> comments) {
-        this.title = title;
-        this.summary = summary;
-        this.body = body;
-        this.category = category;
-        this.comments = comments;
+        this(0, title, summary, body, category, comments);
     }
 
     public Post(Integer id, String title, String summary, String body, Category category) {
-        this.id = id;
-        this.title = title;
-        this.summary = summary;
-        this.body = body;
-        this.category = category;
-        this.comments = new ArrayList<>();
+        this(id, title, summary, body, category, new ArrayList<>());
     }
 
     public Post(Integer id) {
-        this.id = id;
-        this.title = "";
-        this.summary = "";
-        this.body = "";
-        this.category = new Category();
-        this.comments = new ArrayList<>();
+        this(id, "", "", "", new Category(), new ArrayList<>());
     }
 
     public Post(Integer id, String title, String summary, String body, Category category, List<Comment> comments) {
-        this.id = id;
+        super(id);
         this.title = title;
         this.summary = summary;
         this.body = body;

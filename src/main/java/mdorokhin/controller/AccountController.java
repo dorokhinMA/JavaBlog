@@ -32,7 +32,7 @@ public class AccountController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String login = request.getParameter("login");
         String pass = request.getParameter("pass");
-        response.getWriter().println("Hi: "+ login +  " " + pass);
+        response.getWriter().println("Hi: "+ login);
         response.setStatus(HttpServletResponse.SC_OK);
 
     }

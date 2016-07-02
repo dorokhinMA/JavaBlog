@@ -7,7 +7,11 @@ package mdorokhin.model;
 
 public abstract class BaseEntity {
 
-     protected int id;
+    protected int id;
+
+    public BaseEntity(Integer id){
+        this.id = id;
+    }
 
     public int getId() {
         return id;

@@ -14,9 +14,4 @@
         <appender-ref ref="consoleAppender"/>
     </category>
 
-    <category name="org.springframework">
-        <priority value="debug"/>
-        <appender-ref ref="consoleAppender"/>
-    </category>
-
 </log4j:configuration>

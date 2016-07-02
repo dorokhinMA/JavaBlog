@@ -8,6 +8,7 @@ import mdorokhin.model.Post;
 import mdorokhin.service.CommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -21,6 +22,10 @@ public class CommentServiceImpl implements CommentService {
 
     public CommentServiceImpl() {
         commentDAO = new JDBCCommentDAO();
+    }
+
+    public CommentServiceImpl(BaseEntityDAO<Comment, BaseEntity> commentDAO) {
+        this.commentDAO = commentDAO;
     }
 
     @Override

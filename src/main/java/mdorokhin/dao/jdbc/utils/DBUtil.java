@@ -19,7 +19,6 @@ public class DBUtil {
     static ConnectionPool connectionPool = TomcatPool.getInstance();
 
     public static Connection getConnection() {
-
         return connectionPool.getConnection();
     }
 
